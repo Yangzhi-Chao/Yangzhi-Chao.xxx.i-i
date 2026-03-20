@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的留言</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">首页</a>
+  <a href="product.html">产品展示</a>
+  <a href="cart.html">购物车</a>
+  <a href="about.html">关于我</a>
+  <a href="order.html">我的订单</a>
+  <a href="msg.html">我的留言</a>
+  <a href="admin.html">管理员后台</a>
+  <a href="login.html">登录/注册</a>
+</div>
+
+<div class="container">
+  <h2>我的留言</h2>
+  <!-- 新增留言提交区域 -->
+  <div style="margin-bottom:20px;">
+    <input type="text" id="msgName" placeholder="请输入姓名" style="margin:5px;padding:8px;">
+    <input type="text" id="msgPhone" placeholder="请输入电话" style="margin:5px;padding:8px;">
+    <textarea id="msgContent" placeholder="请输入留言内容" style="margin:5px;padding:8px;width:100%;height:80px;"></textarea>
+    <button class="btn" onclick="submitMsg()">提交留言</button>
+  </div>
+  <div id="msgList"></div>
+</div>
+
+<script>
+  function submitMsg() {
+  let name = document.getElementById('msgName').value;
+  let phone = document.getElementById('msgPhone').value;
+  let content = document.getElementById('msgContent').value;
+  if (!name || !content) {
+    alert('姓名和留言内容不能为空！');
+    return;
+  }
+  let msgs = JSON.parse(localStorage.getItem('msgs') || '[]');
+  msgs.push({
+    name: name,
+    phone: phone,
+    content: content,
+    time: new Date().toLocaleString()
+  });
+  localStorage.setItem('msgs', JSON.stringify(msgs));
+  alert('留言提交成功！');
+  // 清空输入框 + 刷新留言列表
+  document.getElementById('msgName').value = '';
+  document.getElementById('msgPhone').value = '';
+  document.getElementById('msgContent').value = '';
+  showMsgs();
+}
+function showMsgs(){
+  let msgs = JSON.parse(localStorage.getItem('msgs') || [])
+  let html = ''
+  if(msgs.length === 0){
+    html = '暂无留言'
+  }else{
+    msgs.forEach((m,i)=>{
+      html += `<div class="msg">
+        <div>留言 ${i+1}</div>
+        <div>姓名：${m.name}</div>
+        <div>电话：${m.phone}</div>
+        <div>内容：${m.content}</div>
+        <div>时间：${m.time}</div>
+      </div><hr>`
+    })
+  }
+  document.getElementById('msgList').innerHTML = html
+}
+window.onload = showMsgs
+</script>
+</body>
+</html>

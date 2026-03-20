@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>购物车</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">首页</a>
+  <a href="product.html">产品展示</a>
+  <a href="cart.html">购物车</a>
+  <a href="about.html">关于我</a>
+  <a href="order.html">我的订单</a>
+  <a href="msg.html">我的留言</a>
+  <a href="admin.html">管理员后台</a>
+  <a href="login.html">登录/注册</a>
+</div>
+
+<div class="container">
+  <h2>购物车</h2>
+  <div id="cartList"></div>
+  <div class="total" id="total"></div>
+  <button class="btn" onclick="goPay()">去付款</button>
+  <button class="btn" onclick="submitOrder()">提交订单</button>
+  <button class="btn" onclick="clearCart()">清空购物车</button>
+</div>
+
+<script>
+function renderCart(){
+  let cart=JSON.parse(localStorage.getItem('cart')||'[]')
+  let list=document.getElementById('cartList')
+  let total=document.getElementById('total')
+  if(cart.length==0){list.innerHTML='购物车为空';total.innerText='';return}
+  let html=''
+  let sum=0
+  cart.forEach(i=>{
+    let subtotal=i.price*i.quantity
+    sum+=subtotal
+    html+=`<div class="cart-item">
+${i.name} 
+<button onclick="changeNum('${i.name}',-1)">-</button>
+${i.quantity}
+<button onclick="changeNum('${i.name}',1)">+</button>
+单价¥${i.price} 小计¥${subtotal.toFixed(2)} 
+<button onclick="removeItem('${i.name}')" style="margin-left:10px;color:red;">删除</button>
+</div>`
+  })
+  list.innerHTML=html
+  total.innerText=`总计：¥${sum.toFixed(2)}`
+}
+function clearCart(){localStorage.removeItem('cart');renderCart()}
+function submitOrder(){
+  let cart=JSON.parse(localStorage.getItem('cart')||'[]')
+  if(cart.length==0){alert('购物车为空');return}
+  let name=prompt('请输入姓名')
+  if(!name)return
+  let phone=prompt('请输入电话')
+  if(!phone)return
+  let address=prompt('请输入地址')
+  if(!address)return
+  let orders=JSON.parse(localStorage.getItem('orders')||'[]')
+  orders.push({name,phone,address,items:cart,time:new Date().toLocaleString()})
+  localStorage.setItem('orders',JSON.stringify(orders))
+  alert('订单提交成功！')
+  localStorage.removeItem('cart')
+  renderCart()
+}function changeNum(name, num) {
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+  let item = cart.find(i => i.name == name)
+  if (!item) return
+  item.quantity += num
+  if (item.quantity < 1) item.quantity = 1
+  localStorage.setItem('cart', JSON.stringify(cart))
+  renderCart()
+}
+window.onload=renderCart
+function removeItem(name) {
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+  cart = cart.filter(item => item.name !== name)
+  localStorage.setItem('cart', JSON.stringify(cart))
+  renderCart()
+}
+function goPay(){
+  let cart=JSON.parse(localStorage.getItem('cart')||'[]')
+  if(cart.length==0){alert('购物车为空！');return}
+  let total=cart.reduce((s,i)=>s+i.price*i.quantity,0)
+  alert('请扫码支付：¥'+total.toFixed(2))
+  window.open('pay.jpg','_blank')
+}
+</script>
+</body>
+</html>

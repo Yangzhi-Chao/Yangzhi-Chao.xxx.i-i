@@ -1,0 +1,236 @@
+/* 全局 */
+body {
+  margin: 0;
+  padding: 20px;
+  background: #f8f9fa;
+  font-family: "微软雅黑", sans-serif;
+  color: #333;
+}
+
+/* 导航 */
+.nav {
+  background: #f01e3a;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.nav a {
+  float: left;
+  color: white;
+  padding: 12px 10px;
+  text-decoration: none;
+  font-size: 14px; /* 新增：字体改小一点，更适配 */
+  white-space: nowrap; /* 新增：防止文字换行 */
+}
+.nav a:hover {
+  background: #c02630;
+}
+
+/* 容器 */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* 按钮通用 */
+.btn {
+  padding: 10px 20px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* 购物车商品 */
+.cart-item {
+  padding: 10px;
+  margin: 10px 0;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+.total {
+  text-align: right;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+/* 订单 */
+.order {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+/* 产品分类按钮 */
+.cat-btn {
+  padding: 8px 16px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin: 0 5px 15px 0;
+  cursor: pointer;
+}
+.cat-btn:hover {
+  background: #c02630;
+}
+
+/* 产品列表 */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.product-card {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  text-align: center;
+}
+.product-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.product-title {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333; /* 强制标题黑色，不会变红 */
+}
+.product-price {
+  color: #e63946;
+  font-weight: bold;
+  margin: 5px 0;
+}
+.buy-btn {
+  padding: 8px 16px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.buy-btn:hover {
+  background: #c02630;
+}
+
+/* 图片预览 */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* 标签切换 */
+.tab {
+  display: none;
+}
+.tab.active {
+  display: block;
+}
+/* 商品数量控制（淘宝风格） */
+.num-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+.num-control button {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.num-control span {
+  width: 30px;
+  text-align: center;
+  font-size: 14px;
+}
+/* 首页照片样式 */
+.photo-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.my-photo {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.pp1, .pp2 {
+  text-align: center;
+  line-height: 1.8;
+}
+h1 {
+  text-align: center;
+}
+/* 留言样式 */
+.msg {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+/* 关于我页面的留言输入框样式 */
+.contact input, .contact textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+/* 手机端产品卡片适配 */
+@media (max-width: 768px) {
+  .product-card {
+    width: 100%; /* 手机上产品卡片占满屏幕宽度，不挤 */
+    max-width: 300px; /* 最多宽300px，不会太宽 */
+  }
+  .container {
+    padding: 10px; /* 手机上容器内边距缩小，省空间 */
+  }
+}
+
+/* 手机端导航栏滑动（防止字太多挤掉） */
+.nav {
+  overflow-x: auto; /* 手机上导航栏可以左右滑动，所有字都能看到 */
+  overflow-y: hidden;
+}
+/* 登录/注册页表单居中优化 */
+.contact {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fff;
+}
