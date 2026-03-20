@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的订单</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">首页</a>
+  <a href="product.html">产品展示</a>
+  <a href="cart.html">购物车</a>
+  <a href="about.html">关于我</a>
+  <a href="order.html">我的订单</a>
+  <a href="msg.html">我的留言</a>
+</div>
+<div class="container">
+  <h2>我的订单</h2>
+  <div id="orderList"></div>
+</div>
+
+<script>
+function showOrders(){
+  // 新增密码验证（密码可自定义，比如 123456）
+  let password = prompt('请输入订单查看密码：');
+  if (password !== '123456') {
+    alert('密码错误！无法查看订单');
+    document.getElementById('orderList').innerHTML = '密码错误，无权查看';
+    return;
+  }
+  let orders = JSON.parse(localStorage.getItem('orders') || [])
+  let html = ''
+  if(orders.length === 0){
+    html = '暂无订单'
+  }else{
+    orders.forEach((o,i)=>{
+  // 先算订单总价
+  let total = o.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  // 拼接商品明细
+  let itemsHtml = o.items.map(item => 
+    `<div>→ ${item.name} ×${item.quantity} 单价¥${item.price} 小计¥${(item.price * item.quantity).toFixed(2)}</div>`
+  ).join('')
+
+  html += `<div class="order">
+    <div>订单 ${i+1}</div>
+    <div>姓名：${o.name}</div>
+    <div>电话：${o.phone}</div>
+    <div>地址：${o.address}</div>
+    <div>时间：${o.time}</div>
+    <div>商品：</div>
+    ${itemsHtml}
+    <div><strong>订单总价：¥${total.toFixed(2)}</strong></div>
+  </div><hr>`
+})
+  }
+  document.getElementById('orderList').innerHTML = html
+}
+window.onload = showOrders
+</script>
+</body>
+</html>
