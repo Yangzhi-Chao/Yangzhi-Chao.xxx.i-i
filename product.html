@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品展示</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">首页</a>
+  <a href="product.html">产品展示</a>
+  <a href="cart.html">购物车</a>
+  <a href="about.html">关于我</a>
+  <a href="order.html">我的订单</a>
+  <a href="msg.html">我的留言</a>
+  <a href="admin.html">管理员后台</a>
+  <a href="login.html">登录/注册</a>
+</div>
+
+<div class="container">
+  <h2 style="text-align:center;">产品展示</h2>
+  <button class="cat-btn" onclick="show('all')">全部</button>
+  <button class="cat-btn" onclick="show('person')">个人照片</button>
+  <button class="cat-btn" onclick="show('scenery')">风景照片</button>
+  <button class="cat-btn" onclick="show('custom')">定制服务</button>
+
+  <!-- 全部 -->
+  <div id="all" class="tab active">
+    <div class="product-list">
+      <div class="product-card">
+        <img src="1.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">我的青年照片</h3>
+        <p class="product-price">¥0.8</p>
+        <div class="num-control">
+  <button onclick="changeProductNum('我的青年照片', -1)">-</button>
+  <span id="num-我的青年照片">1</span>
+  <button onclick="changeProductNum('我的青年照片', 1)">+</button>
+</div>
+        <button class="buy-btn" onclick="addWithNum('我的青年照片',0.8)">加入购物车</button>
+      </div>
+      <div class="product-card">
+        <img src="3.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">我的汉服照片</h3>
+        <p class="product-price">¥0.8</p>
+        <div class="num-control">
+  <button onclick="changeProductNum('我的汉服照片', -1)">-</button>
+  <span id="num-我的汉服照片">1</span>
+  <button onclick="changeProductNum('我的汉服照片', 1)">+</button>
+</div>
+        <button class="buy-btn" onclick="addWithNum('我的汉服照片',0.8)">加入购物车</button>
+      </div>
+      <div class="product-card">
+        <img src="5.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">银河系照片</h3>
+        <p class="product-price">¥0.8</p>
+        <div class="num-control">
+  <button onclick="changeProductNum('银河系照片', -1)">-</button>
+  <span id="num-银河系照片">1</span>
+  <button onclick="changeProductNum('银河系照片', 1)">+</button>
+</div>
+        <button class="buy-btn" onclick="addWithNum('银河系照片',0.8)">加入购物车</button>
+      </div>
+      <div class="product-card">
+        <img src="6.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">老家风景</h3>
+        <p class="product-price">¥1</p>
+        <div class="num-control">
+  <button onclick="changeProductNum('老家风景', -1)">-</button>
+  <span id="num-老家风景">1</span>
+  <button onclick="changeProductNum('老家风景', 1)">+</button>
+</div>
+        <button class="buy-btn" onclick="addWithNum('老家风景',1)">加入购物车</button>
+      </div>
+      <div class="product-card">
+        <img src="7.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">蜂箱</h3>
+        <p class="product-price">¥1</p>
+        <div class="num-control">
+  <button onclick="changeProductNum('蜂箱', -1)">-</button>
+  <span id="num-蜂箱">1</span>
+  <button onclick="changeProductNum('蜂箱', 1)">+</button>
+</div>
+        <button class="buy-btn" onclick="addWithNum('蜂箱',1)">加入购物车</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 个人 -->
+  <div id="person" class="tab">
+    <div class="product-list">
+      <div class="product-card">
+        <img src="1.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">我的青年照片</h3>
+        <p class="product-price">¥0.8</p>
+        <button class="buy-btn" onclick="addWithNum('我的青年照片',0.8)">加入购物车</button>
+      </div>
+      <div class="product-card">
+        <img src="3.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">我的汉服照片</h3>
+        <p class="product-price">¥0.8</p>
+        <button class="buy-btn" onclick="addWithNum('我的汉服照片',0.8)">加入购物车</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 风景 -->
+  <div id="scenery" class="tab">
+    <div class="product-list">
+      <div class="product-card">
+        <img src="5.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">银河系照片</h3>
+        <p class="product-price">¥0.8</p>
+        <button class="buy-btn" onclick="addWithNum('银河系照片',0.8)">加入购物车</button>
+      </div>
+      <div class="product-card">
+        <img src="6.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">老家风景</h3>
+        <p class="product-price">¥1</p>
+        <button class="buy-btn" onclick="addWithNum('老家风景',1)">加入购物车</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 定制 -->
+  <div id="custom" class="tab">
+    <div class="product-list">
+      <div class="product-card">
+        <img src="7.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">蜂箱</h3>
+        <p class="product-price">¥1</p>
+        <button class="buy-btn" onclick="addWithNum('蜂箱',1)">加入购物车</button>
+      </div>
+      <div class="product-card">
+        <img src="8.jpeg" class="product-img" onclick="openLightbox(this.src)">
+        <h3 class="product-title">蜂箱帐篷</h3>
+        <p class="product-price">¥1</p>
+        <button class="buy-btn" onclick="addWithNum('蜂箱帐篷',1)">加入购物车</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img src="" id="lightbox-img">
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
+  document.getElementById(id).classList.add('active')
+}
+function openLightbox(src){
+  document.getElementById('lightbox').style.display='flex'
+  document.getElementById('lightbox-img').src=src
+}
+function closeLightbox(){
+  document.getElementById('lightbox').style.display='none'
+}
+function add(name,price){
+  let cart=JSON.parse(localStorage.getItem('cart')||'[]')
+  let item=cart.find(i=>i.name==name)
+  if(item)item.quantity++
+  else cart.push({name,price,quantity:1})
+  localStorage.setItem('cart',JSON.stringify(cart))
+  alert('已加入购物车：'+name)
+}
+// 全局存储每个商品的选择数量
+let productNums = {};
+
+// 修改商品数量（淘宝加减逻辑）
+function changeProductNum(name, num) {
+  // 初始化数量为1
+  if (!productNums[name]) productNums[name] = 1;
+  // 加减数量，最少保留1件
+  productNums[name] += num;
+  if (productNums[name] < 1) productNums[name] = 1;
+  // 更新页面显示的数字
+  document.getElementById('num-' + name).innerText = productNums[name];
+}
+
+// 按选择的数量加入购物车（替换原来的add函数逻辑）
+function addWithNum(name, price) {
+  let num = productNums[name] || 1;
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  let item = cart.find(i => i.name === name);
+  
+  if (item) {
+    item.quantity += num; // 已有商品，数量累加
+  } else {
+    cart.push({ name, price, quantity: num }); // 新商品，用选择的数量
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(`已加入 ${num} 件「${name}」到购物车`);
+  // 加入后重置数量为1，方便下次选择
+  productNums[name] = 1;
+  document.getElementById('num-' + name).innerText = 1;
+}
+</script>
+
+</body>
+</html>

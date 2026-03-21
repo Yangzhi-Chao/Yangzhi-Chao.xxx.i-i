@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于我</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="nav">
+  <a href="index.html">首页</a>
+  <a href="product.html">产品展示</a>
+  <a href="cart.html">购物车</a>
+  <a href="about.html">关于我</a>
+  <a href="order.html">我的订单</a>
+  <a href="msg.html">我的留言</a>
+  <a href="admin.html">管理员后台</a>
+  <a href="login.html">登录/注册</a>
+</div>
+
+<div class="container">
+  <h2>关于我</h2>
+  <p>我叫杨志超，正在学习前端开发，自己做商城网站</p>
+  <p>电话：13774419938</p>
+  <p>地址：云南省广南县珠琳镇阿卡黑</p>
+
+  <div class="contact">
+    <h3>留言咨询</h3>
+    <input type="text" id="name" placeholder="你的姓名">
+    <input type="text" id="phone" placeholder="你的电话">
+    <textarea rows="4" id="content" placeholder="留言内容"></textarea>
+    <button class="btn" onclick="sendMsg()">提交留言</button>
+  </div>
+</div>
+
+<script>
+function sendMsg(){
+  let user = JSON.parse(localStorage.getItem('currentUser'));
+  if(!user){
+    alert('请先登录后再留言！'); // 正确：和功能匹配
+    location.href = 'login.html';
+    return;
+  }
+  // 原来的提交订单代码保持不变...
+  let name=document.getElementById('name').value
+  let phone=document.getElementById('phone').value
+  let content=document.getElementById('content').value
+  if(!name||!phone||!content){alert('请填写完整');return}
+  let msg = {
+    userName: user.name,    // 新增：归属用户名
+    userPhone: user.phone,  // 新增：归属用户手机号
+    name: name,
+    phone: phone,
+    content: content,
+    time: new Date().toLocaleString()
+  };
+
+  let msgs = JSON.parse(localStorage.getItem('msgs') || '[]');
+  msgs.push(msg);
+  localStorage.setItem('msgs', JSON.stringify(msgs));
+  alert('留言成功！');
+  document.getElementById('name').value = '';
+document.getElementById('phone').value = '';
+document.getElementById('content').value = '';
+  // 清空输入框代码保持不变...
+}
+</script>
+
+</body>
+</html>
