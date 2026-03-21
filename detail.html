@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商品详情</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">首页</a>
+  <a href="product.html">产品展示</a>
+  <a href="cart.html">购物车</a>
+  <a href="about.html">关于我</a>
+  <a href="order.html">我的订单</a>
+  <a href="msg.html">我的留言</a>
+  <a href="admin.html">管理员后台</a>
+  <a href="login.html">登录/注册</a>
+</div>
+
+<div class="container">
+  <div class="product-detail">
+    <img id="detailImg" class="detail-img">
+    <h2 id="detailName">商品名称</h2>
+    <p id="detailPrice" class="detail-price">¥0.00</p>
+    
+    <div class="num-control">
+      <button onclick="changeNum(-1)">-</button>
+      <span id="nowNum">1</span>
+      <button onclick="changeNum(1)">+</button>
+    </div>
+
+    <button class="buy-btn" onclick="addCart()">加入购物车</button>
+  </div>
+</div>
+
+<script>
+// 接收商品信息
+let goods = JSON.parse(decodeURIComponent(location.search.substr(1)))
+
+document.getElementById('detailName').innerText = goods.name
+document.getElementById('detailPrice').innerText = '¥' + goods.price
+document.getElementById('detailImg').src = goods.src
+
+// 数量
+let num = 1
+function changeNum(n) {
+  num += n
+  if(num < 1) num = 1
+  document.getElementById('nowNum').innerText = num
+}
+
+// 加入购物车
+function addCart() {
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]')
+  let item = cart.find(i => i.name === goods.name)
+  if(item) {
+    item.quantity += num
+  } else {
+    cart.push({
+      name: goods.name,
+      price: goods.price,
+      quantity: num
+    })
+  }
+  localStorage.setItem('cart', JSON.stringify(cart))
+  alert('已加入购物车！')
+}
+</script>
+
+</body>
+</html>
